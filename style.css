@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Space+Grotesk:wght@300;400;600&display=swap');
+
+html,
+body {
+    overflow-x: hidden;
+    background-color: #f8f5f2;
+    /* Light cream */
+    transition: background-color 0.8s ease;
+}
+
+.perspective-1000 {
+    perspective: 1000px;
+}
+
+.preserve-3d {
+    transform-style: preserve-3d;
+}
+
+#entrance {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #3B2F2F;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#particles-intro {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.brand-text {
+    font-family: 'Space Grotesk', sans-serif;
+    z-index: 2;
+    opacity: 0;
+}
+
+/* Gradient Text Utilities */
+.text-gradient {
+    background: linear-gradient(135deg, #3B2F2F 0%, #5C7A4A 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-vertical {
+    background: linear-gradient(to bottom, #D4AF37 0%, #F8F5F2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -2px;
+    left: 0;
+    background-color: #D4AF37;
+    transition: width 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* Mobile Dropdown Menu */
+#mobile-menu {
+    max-height: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: max-height 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        opacity 0.4s ease,
+        visibility 0.4s ease;
+}
+
+#mobile-menu.open {
+    max-height: 400px;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Hamburger Icon Animation */
+#menu-btn.active .hamburger-line:first-child {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+#menu-btn.active .hamburger-line:last-child {
+    transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.hamburger-line {
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Animation Helpers */
+.char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(100%);
+}
+
+.skew-up-reveal {
+    opacity: 0;
+    transform: translateY(100%) skewY(7deg);
+    transform-origin: top left;
+}
+
+/* Vertical Wipe Mask */
+.origin-mask {
+    clip-path: inset(100% 0 0 0);
+    /* Hidden from bottom */
+    transition: clip-path 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.reveal-image {
+    transition: transform 1.5s ease-out;
+}
+
+/* Origins Heading Words */
+.origins-word {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+/* Product Card */
+.card-inner {
+    transform-style: preserve-3d;
+}
+
+.magnetic-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Image Reveal Fix & Grayscale Effect */
+.reveal-container-clip {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.reveal-visible {
+    clip-path: inset(0 0 0 0);
+}
+
+.grayscale-hover {
+    filter: grayscale(100%);
+    transition: filter 0.5s ease;
+}
+
+.grayscale-hover:hover {
+    filter: grayscale(0%);
+}
+
+/* Moving Border Button (CSS Implementation) */
+.moving-border-btn {
+    position: relative;
+    display: inline-flex;
+    height: 3.5rem;
+    /* h-14 */
+    width: auto;
+    overflow: hidden;
+    padding: 1px;
+    /* border width */
+    border-radius: 9999px;
+    /* rounded-full */
+    background-color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+
+.moving-border-btn-inner {
+    position: relative;
+    display: flex;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: #3B2F2F;
+    /* bg-slate-900 equivalent */
+    color: white;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    z-index: 20;
+}
+
+.moving-border-spotlight {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 200%;
+    width: 200%;
+    transform: translate(-50%, -50%);
+    background: conic-gradient(from 90deg at 50% 50%, transparent 0%, transparent 50%, #D4AF37 100%);
+    /* Gold Spotlight */
+    animation: spin-border 3s linear infinite;
+    z-index: 10;
+}
+
+@keyframes spin-border {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}

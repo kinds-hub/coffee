@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cossi's | Organic Coffee</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espresso: '#3B2F2F',
+                        leaf: '#5C7A4A',
+                        gold: '#D4AF37',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+
+<body class="antialiased text-espresso">
+
+    <!-- CIENEMATIC ENTRANCE OVERLAY -->
+    <div id="entrance">
+        <canvas id="particles-intro"></canvas>
+        <h1 id="brand-name" class="brand-text text-6xl md:text-8xl font-light text-white tracking-widest relative">
+            [ cossi's ]
+            <span class="absolute -inset-1 blur-xl bg-gold/20 rounded-full z-[-1]"></span>
+        </h1>
+    </div>
+
+    <!-- NAVIGATION -->
+    <nav class="fixed top-0 w-full z-40 px-6 py-6 flex justify-between items-center text-white bg-black/40 backdrop-blur-md border-b border-white/10 transition-colors duration-500"
+        id="navbar">
+        <div class="text-2xl font-display font-bold tracking-tight z-50">[ cossi's ]</div>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-12 font-sans text-sm tracking-wide">
+            <a href="#showcase" class="nav-link">SHOP</a>
+            <a href="#" class="nav-link">SUBSCRIPTIONS</a>
+            <a href="#contact" class="nav-link">WHOLESALE</a>
+            <a href="#origins" class="nav-link">ORIGINS</a>
+        </div>
+
+        <!-- Hamburger -->
+        <button id="menu-btn" class="md:hidden z-50 focus:outline-none flex flex-col gap-1.5" aria-label="Toggle menu">
+            <div class="hamburger-line w-7 h-0.5 bg-current origin-center"></div>
+            <div class="hamburger-line w-7 h-0.5 bg-current origin-center"></div>
+        </button>
+    </nav>
+
+    <!-- MOBILE DROPDOWN MENU -->
+    <div id="mobile-menu"
+        class="fixed top-[72px] left-0 w-full bg-espresso/95 backdrop-blur-lg z-40 overflow-hidden md:hidden border-b border-white/10">
+        <div class="flex flex-col py-6 px-6 space-y-4">
+            <a href="#showcase"
+                class="mobile-link text-xl font-display font-light text-white hover:text-gold transition-colors duration-300 py-3 border-b border-white/10">Shop</a>
+            <a href="#"
+                class="mobile-link text-xl font-display font-light text-white hover:text-gold transition-colors duration-300 py-3 border-b border-white/10">Subscriptions</a>
+            <a href="#contact"
+                class="mobile-link text-xl font-display font-light text-white hover:text-gold transition-colors duration-300 py-3 border-b border-white/10">Wholesale</a>
+            <a href="#origins"
+                class="mobile-link text-xl font-display font-light text-white hover:text-gold transition-colors duration-300 py-3">Origins</a>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT WRAPPER (For Parallax Reveal) -->
+    <div id="content-wrapper" class="relative z-10 bg-white transition-colors duration-1000">
+
+        <!-- MAIN CONTENT -->
+        <main class="relative w-full">
+            <!-- HERO SECTION -->
+            <section
+                class="relative min-h-screen flex items-center justify-center px-6 pt-20 overflow-hidden bg-espresso text-white">
+                <!-- Background Canvas for subtle effect -->
+                <canvas id="hero-bg" class="absolute inset-0 w-full h-full z-0 opacity-20 mixed-blend-overlay"></canvas>
+
+                <div
+                    class="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 max-w-7xl mx-auto w-full items-center">
+                    <!-- Text Content -->
+                    <div class="md:col-span-7 space-y-8 text-center md:text-left">
+                        <div class="overflow-hidden py-4">
+                            <h2
+                                class="text-6xl md:text-8xl lg:text-9xl font-serif font-bold leading-tight text-gradient-vertical">
+                                Awaken <br>
+                                Your Senses
+                            </h2>
+                        </div>
+                        <div class="overflow-hidden">
+                            <p
+                                class="hero-sub text-lg md:text-xl font-sans text-white/80 max-w-lg mx-auto md:mx-0 leading-relaxed">
+                                Ethically sourced, organically grown. Experience the purest form of coffee, crafted for
+                                moments of tranquility.
+                            </p>
+                        </div>
+                        <div class="pt-8 overflow-hidden">
+                            <!-- Moving Border Button Implementation -->
+                            <a href="#showcase"
+                                class="moving-border-btn shadow-xl hover:scale-105 transition-transform duration-300">
+                                <div class="moving-border-spotlight"></div>
+                                <div class="moving-border-btn-inner font-sans font-bold text-gold">
+                                    Discover the Roast
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Coffee Image -->
+                    <div
+                        class="md:col-span-5 h-[50vh] md:h-[70vh] relative hidden md:block flex items-center justify-center">
+                        <div class="w-full h-full rounded-full overflow-hidden border-4 border-gold/30 shadow-2xl">
+                            <img src="hero-coffee.png" alt="Coffee cups"
+                                class="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ORIGINS SECTION (Brand Narrative) -->
+            <section id="origins" class="relative min-h-screen flex items-center pt-8 pb-20 md:py-20 overflow-hidden">
+                <div class="container mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+                    <!-- Masked Image Reveal -->
+                    <div
+                        class="relative w-full aspect-[4/3] md:w-3/4 mx-auto overflow-hidden reveal-container-clip grayscale-hover shadow-2xl rounded-2xl">
+                        <div
+                            class="w-full h-full bg-[url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2561&auto=format&fit=crop')] bg-cover bg-center reveal-image opacity-100 transform scale-110">
+                        </div>
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="space-y-8">
+                        <span
+                            class="inline-block text-xs font-sans tracking-[0.2em] uppercase text-espresso/60 overflow-hidden">
+                            <span class="block origin-label opacity-0 translate-y-4">The Beginning</span>
+                        </span>
+
+                        <h2 id="origins-heading" class="text-5xl md:text-7xl font-serif font-medium leading-tight">
+                            <span class="origins-word">From</span> <span
+                                class="origins-word text-gold italic">Soil</span> <br>
+                            <span class="origins-word">To</span> <span class="origins-word text-gold italic">Soul</span>
+                        </h2>
+
+                        <div class="overflow-hidden">
+                            <p
+                                class="font-sans text-lg text-espresso/80 leading-relaxed max-w-md origin-text transform translate-y-full opacity-0">
+                                Every bean tells a story of the earth it grew in, the hands that nurtured it, and the
+                                journey it took to reach your cup. We honor this journey with every roast.
+                            </p>
+                        </div>
+
+                        <div class="overflow-hidden pt-4">
+                            <a href="#"
+                                class="origin-cta inline-flex items-center space-x-2 text-espresso border-b border-espresso pb-1 transform -translate-x-full">
+                                <span class="font-sans text-sm tracking-widest uppercase">Our Story</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRODUCT SHOWCASE SECTION (Magnetic & 3D) -->
+            <section id="showcase"
+                class="relative min-h-screen py-32 bg-espresso text-white transition-colors duration-1000">
+                <div class="container mx-auto px-6">
+                    <!-- Section Header -->
+                    <div class="mb-24 flex flex-col md:flex-row md:items-end justify-between gap-8">
+                        <h2 class="text-6xl md:text-8xl font-display font-light">
+                            Select <br>
+                            Roasts
+                        </h2>
+                        <p class="font-sans text-white/60 max-w-sm text-sm tracking-wide leading-relaxed pb-2">
+                            Hand-selected beans, roared to perfection. Experience the spectrum of flavor defined by
+                            nature.
+                        </p>
+                    </div>
+
+                    <!-- Product Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        <!-- Product Card 1 -->
+                        <div
+                            class="product-card group relative h-[500px] w-full bg-espresso border border-white/10 rounded-2xl overflow-hidden cursor-pointer perspective-1000">
+                            <img src="assets/Ethiopian%20Yirgacheffe%20Specialty%20Coffee%20_%201%20Bag%20of%2012oz_%20Coffee%20(Whole%20Bean)%20_%20Light%20Roast.png"
+                                alt="Ethiopian Yirgacheffe"
+                                class="absolute inset-0 w-full h-full object-cover z-0 opacity-100 contrast-150 group-hover:scale-105 group-hover:contrast-[1.75] transition-all duration-700 ease-out">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/50 to-transparent z-0 pointer-events-none">
+                            </div>
+                            <div
+                                class="card-inner w-full h-full relative z-10 p-8 flex flex-col justify-between transition-transform duration-100 ease-out">
+                                <!-- Magnetic Blob (Hidden by default) -->
+                                <div
+                                    class="magnetic-blob absolute w-64 h-64 bg-leaf/20 rounded-full blur-3xl opacity-0 pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 group-hover:opacity-100">
+                                </div>
+
+                                <div class="relative z-20 flex justify-between items-start">
+                                    <span
+                                        class="font-display text-4xl group-hover:scale-110 transition-transform duration-500 origin-top-left">01</span>
+                                    <span class="font-sans text-xs tracking-widest uppercase opacity-60">Light
+                                        Roast</span>
+                                </div>
+
+                                <div class="relative z-20 overflow-hidden">
+                                    <h3
+                                        class="product-name text-3xl font-display transform translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
+                                        Ethiopian <br> Yirgacheffe
+                                    </h3>
+                                    <p
+                                        class="mt-4 text-sm text-white/60 font-sans opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                                        Floral, bright, with notes of jasmine and citrus.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 2 -->
+                        <div
+                            class="product-card group relative h-[500px] w-full bg-transparent border border-white/10 rounded-2xl overflow-hidden cursor-pointer perspective-1000 translate-y-12">
+                            <img src="assets/Colombian%20Supremo%20Coffee%20Beans_%20Gourmet%20Aroma%20%26%20Flavor%20-%20Whole%20Beans%2012%20OZ_.png"
+                                alt="Colombian Supremo"
+                                class="absolute inset-0 w-full h-full object-cover z-0 opacity-100 group-hover:scale-105 transition-all duration-700 ease-out">
+                            <div
+                                class="card-inner w-full h-full relative z-10 p-8 flex flex-col justify-between transition-transform duration-100 ease-out text-white">
+                                <div
+                                    class="magnetic-blob absolute w-64 h-64 bg-gold/20 rounded-full blur-3xl opacity-0 pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 group-hover:opacity-100">
+                                </div>
+
+                                <div class="relative z-20 flex justify-between items-start">
+                                    <span
+                                        class="font-display text-4xl group-hover:scale-110 transition-transform duration-500 origin-top-left">02</span>
+                                    <span class="font-sans text-xs tracking-widest uppercase opacity-60">Medium
+                                        Roast</span>
+                                </div>
+
+                                <div class="relative z-20 overflow-hidden">
+                                    <h3
+                                        class="product-name text-3xl font-display transform translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
+                                        Colombian <br> Supremo
+                                    </h3>
+                                    <p
+                                        class="mt-4 text-sm text-white/60 font-sans opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                                        Caramel sweetness, nutty finish, balanced.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Product Card 3 -->
+                        <div
+                            class="product-card group relative h-[500px] w-full bg-espresso border border-white/10 rounded-2xl overflow-hidden cursor-pointer perspective-1000 translate-y-24">
+                            <img src="assets/Sumatra%20Mandheling%20Gayo%20_%20Naturally%20Grown%20Coffee%20_%20Dark%20Roast%20by%20Black%20Powder%20Coffee%20-%20Coarse%20_%205%20lbs.png"
+                                alt="Sumatra Mandheling"
+                                class="absolute inset-0 w-full h-full object-cover z-0 opacity-100 contrast-[1.3] group-hover:scale-105 group-hover:contrast-150 transition-all duration-700 ease-out">
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-espresso via-espresso/50 to-transparent z-0 pointer-events-none">
+                            </div>
+                            <div
+                                class="card-inner w-full h-full relative z-10 p-8 flex flex-col justify-between transition-transform duration-100 ease-out">
+                                <div
+                                    class="magnetic-blob absolute w-64 h-64 bg-espresso/40 rounded-full blur-3xl opacity-0 pointer-events-none -translate-x-1/2 -translate-y-1/2 transition-opacity duration-500 group-hover:opacity-100">
+                                </div>
+
+                                <div class="relative z-20 flex justify-between items-start">
+                                    <span
+                                        class="font-display text-4xl group-hover:scale-110 transition-transform duration-500 origin-top-left">03</span>
+                                    <span class="font-sans text-xs tracking-widest uppercase opacity-60">Dark
+                                        Roast</span>
+                                </div>
+
+                                <div class="relative z-20 overflow-hidden">
+                                    <h3
+                                        class="product-name text-3xl font-display transform translate-y-full transition-transform duration-500 ease-out group-hover:translate-y-0">
+                                        Sumatra <br> Mandheling
+                                    </h3>
+                                    <p
+                                        class="mt-4 text-sm text-white/60 font-sans opacity-0 transform translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 delay-100">
+                                        Full body, earthy, spicy chocolate notes.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <!-- PARTNERSHIP / INQUIRY SECTION (Pre-Footer) -->
+        <section id="contact" class="relative py-24 bg-[#F2ECE4] text-espresso border-t border-espresso/5">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
+
+                    <!-- 1. Copy & Context -->
+                    <div class="space-y-8">
+                        <span class="text-xs font-sans tracking-[0.2em] uppercase text-espresso/60 block">Partner with
+                            cossi's</span>
+                        <h2 class="text-5xl md:text-6xl font-serif font-medium leading-tight text-espresso">
+                            Craft the <br>
+                            <span class="italic text-gold">Exceptional.</span>
+                        </h2>
+                        <p class="font-sans text-lg text-espresso/70 leading-relaxed max-w-md">
+                            Whether you are a cafe looking for a signature roast or a coffee lover seeking a
+                            subscription,
+                            we are here to elevate your ritual.
+                        </p>
+
+                        <div class="pt-4 flex flex-col space-y-4 font-sans text-sm text-espresso/60">
+                            <div class="flex items-center space-x-3">
+                                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                                <span>Wholesale Partnerships</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                                <span>Corporate Gifting</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <span class="w-2 h-2 rounded-full bg-gold"></span>
+                                <span>Private Events</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Minimalist Form -->
+                    <div class="bg-white p-8 md:p-12 rounded-2xl shadow-xl shadow-espresso/5">
+                        <form name="coffee-inquiry" method="POST" data-netlify="true" class="space-y-8">
+                            <input type="hidden" name="form-name" value="coffee-inquiry" />
+
+                            <!-- Name -->
+                            <div class="relative group">
+                                <input type="text" name="name" id="name" required placeholder=" "
+                                    class="peer w-full bg-transparent border-b border-espresso/20 py-2 font-sans text-espresso focus:outline-none focus:border-gold transition-colors duration-300">
+                                <label for="name"
+                                    class="absolute left-0 top-2 text-espresso/50 text-sm font-sans transition-all duration-300 pointer-events-none group-focus-within:-top-5 group-focus-within:text-xs group-focus-within:text-gold peer-valid:-top-5 peer-valid:text-xs peer-valid:text-gold">
+                                    Your Name
+                                </label>
+                            </div>
+
+                            <!-- Email -->
+                            <div class="relative group">
+                                <input type="email" name="email" id="email" required placeholder=" "
+                                    class="peer w-full bg-transparent border-b border-espresso/20 py-2 font-sans text-espresso focus:outline-none focus:border-gold transition-colors duration-300">
+                                <label for="email"
+                                    class="absolute left-0 top-2 text-espresso/50 text-sm font-sans transition-all duration-300 pointer-events-none group-focus-within:-top-5 group-focus-within:text-xs group-focus-within:text-gold peer-valid:-top-5 peer-valid:text-xs peer-valid:text-gold">
+                                    Email Address
+                                </label>
+                            </div>
+
+                            <!-- Inquiry Type -->
+                            <div class="relative">
+                                <label class="block text-xs uppercase tracking-widest text-espresso/40 mb-2">I am
+                                    interested
+                                    in</label>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="interest" value="wholesale" class="peer sr-only">
+                                        <div
+                                            class="border border-espresso/20 text-espresso/60 py-3 text-center text-sm font-sans rounded-lg transition-all duration-300 peer-checked:bg-espresso peer-checked:text-white peer-checked:border-espresso hover:border-espresso/40">
+                                            Wholesale
+                                        </div>
+                                    </label>
+                                    <label class="cursor-pointer">
+                                        <input type="radio" name="interest" value="individual" class="peer sr-only">
+                                        <div
+                                            class="border border-espresso/20 text-espresso/60 py-3 text-center text-sm font-sans rounded-lg transition-all duration-300 peer-checked:bg-espresso peer-checked:text-white peer-checked:border-espresso hover:border-espresso/40">
+                                            Subscription
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Message -->
+                            <div class="relative group pt-4">
+                                <textarea name="message" id="message" rows="3" placeholder=" "
+                                    class="peer w-full bg-transparent border-b border-espresso/20 py-2 font-sans text-espresso focus:outline-none focus:border-gold transition-colors duration-300 resize-none"></textarea>
+                                <label for="message"
+                                    class="absolute left-0 top-6 text-espresso/50 text-sm font-sans transition-all duration-300 pointer-events-none group-focus-within:-top-0 group-focus-within:text-xs group-focus-within:text-gold peer-valid:-top-0 peer-valid:text-xs peer-valid:text-gold">
+                                    Tell us more...
+                                </label>
+                            </div>
+
+                            <!-- Submit -->
+                            <button type="submit"
+                                class="w-full bg-espresso text-white py-4 rounded-lg font-sans text-sm tracking-widest uppercase hover:bg-gold transition-colors duration-500 shadow-lg shadow-espresso/20">
+                                Send Inquiry
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- End Content Wrapper -->
+
+    <!-- GRAND FINALE FOOTER -->
+    <footer id="footer"
+        class="relative z-10 md:fixed md:bottom-0 md:left-0 w-full md:z-0 bg-espresso text-white overflow-hidden">
+        <!-- Liquid Scroll Progress (Top of Footer) -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-white/10">
+            <div id="footer-progress" class="h-full bg-leaf w-0"></div>
+        </div>
+
+        <!-- Glassmorphism Border Top -->
+        <div class="absolute top-0 left-0 w-full h-px bg-white/5 backdrop-blur-sm z-20"></div>
+
+        <!-- Massive Watermark -->
+        <div
+            class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-5 select-none overflow-hidden">
+            <span
+                class="text-[20vw] font-display font-bold leading-none tracking-tighter text-white whitespace-nowrap parallax-watermark">
+                cossi's
+            </span>
+        </div>
+
+        <!-- Bento Grid Content -->
+        <div class="relative z-10 container mx-auto px-6 py-20 min-h-[60vh] flex flex-col justify-end">
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end">
+
+                <!-- 1. Brand Mission (Span 4) -->
+                <div class="md:col-span-4 space-y-6 footer-item">
+                    <h3 class="text-2xl font-display">Mission</h3>
+                    <p class="font-sans text-white/60 text-sm leading-relaxed max-w-sm">
+                        To cultivate a deeper connection between the earth and your cup. Sustainable, ethical, and
+                        meticulously crafted for the moments that matter.
+                    </p>
+                    <div class="pt-4">
+                        <a href="https://wa.me/"
+                            class="inline-flex items-center space-x-3 bg-leaf/20 hover:bg-leaf/30 text-leaf px-6 py-3 rounded-full transition-colors duration-300 group">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM12 20C7.59 20 4 16.41 4 12C4 7.59 7.59 4 12 4C16.41 4 20 7.59 20 12C20 16.41 16.41 20 12 20ZM13 7H11V13H17V11H13V7Z"
+                                    fill-opacity="0" />
+                                <path
+                                    d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                            </svg>
+                            <span class="font-sans text-sm tracking-wide">Brew with Us</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2. Quick Nav (Span 2) -->
+                <div class="md:col-span-2 space-y-6 footer-item">
+                    <h3 class="text-2xl font-display">Explore</h3>
+                    <ul class="space-y-3 font-sans text-sm text-white/60">
+                        <li><a href="#" class="hover:text-leaf transition-colors">Origins</a></li>
+                        <li><a href="#" class="hover:text-leaf transition-colors">Shop All</a></li>
+                        <li><a href="#" class="hover:text-leaf transition-colors">Brew Guides</a></li>
+                        <li><a href="#" class="hover:text-leaf transition-colors">The Journal</a></li>
+                        <li><a href="#" class="hover:text-leaf transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- 3. Newsletter (Span 3) -->
+                <div class="md:col-span-3 space-y-6 footer-item">
+                    <h3 class="text-2xl font-display">Notes</h3>
+                    <div class="relative">
+                        <input type="email" placeholder="Email Address"
+                            class="w-full bg-transparent border-b border-white/20 py-3 text-sm focus:outline-none placeholder-white/30 peer">
+                        <div
+                            class="absolute bottom-0 left-0 w-full h-px bg-leaf transform scale-x-0 transition-transform duration-500 peer-focus:scale-x-100">
+                        </div>
+                        <button
+                            class="absolute right-0 bottom-3 text-xs uppercase tracking-widest text-white/50 hover:text-white transition-colors">
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 4. Social Hub (Span 3) -->
+                <div class="md:col-span-3 space-y-6 flex flex-col items-start md:items-end footer-item">
+                    <h3 class="text-2xl font-display">Connect</h3>
+                    <div class="flex space-x-6">
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/cossis_organic"
+                            class="magnetic-icon group relative p-4 rounded-full border border-white/10 hover:border-leaf/50 transition-colors duration-300">
+                            <svg class="w-6 h-6 group-hover:text-leaf transition-colors duration-300"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                            </svg>
+                        </a>
+                        <!-- X (Twitter) -->
+                        <a href="https://x.com/cossis_coffee"
+                            class="magnetic-icon group relative p-4 rounded-full border border-white/10 hover:border-leaf/50 transition-colors duration-300">
+                            <svg class="w-6 h-6 group-hover:text-leaf transition-colors duration-300"
+                                fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Legal -->
+            <div
+                class="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-[10px] uppercase tracking-widest text-white/30 mix-blend-overlay">
+                <div>&copy; 2026 cossi's Organic Coffee</div>
+                <div class="space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="hover:text-white transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="script.js"></script>
+</body>
+
+</html>
